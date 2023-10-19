@@ -7,10 +7,12 @@
 
 (setq package-enable-at-startup nil)
 
-(setq package-archives '(("ELPA"  . "http://tromey.com/elpa/")
-			 ("gnu"   . "http://elpa.gnu.org/packages/")
-			 ("melpa" . "http://melpa.org/packages/")
-			 ("org"   . "http://orgmode.org/elpa/")))
+(setq package-archives '(
+  ("ELPA"   . "http://tromey.com/elpa/")
+  ("gnu"    . "http://elpa.gnu.org/packages/")
+  ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+  ("melpa"  . "http://melpa.org/packages/")
+  ("org"    . "http://orgmode.org/elpa/")))
 
 (package-initialize)
 
