@@ -1,3 +1,31 @@
+* utf 8 encoding
+#+BEGIN_SRC emacs-lisp
+  (setq locale-coding-system 'utf-8)
+  ;(set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (set-selection-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+#+END_SRC
+
+* font size
+#+BEGIN_SRC emacs-lisp
+  ;; set default font
+  (cond
+   ((string-equal system-type "windows-nt") ; Microsoft Windows
+    (when (member "Consolas" (font-family-list))
+      (set-frame-font "Consolas" t t)))
+   ((string-equal system-type "darwin") ; macOS
+    (when (member "Menlo" (font-family-list))
+      (set-frame-font "Menlo" t t)))
+   ((string-equal system-type "gnu/linux") ; linux
+    (when (member "DejaVu Sans Mono" (font-family-list))
+      (set-frame-font "DejaVu Sans Mono" t t))))
+  ;; font size
+  (when (member "Consolas" (font-family-list))
+  (set-frame-font "Consolas-14" t t))
+#+END_SRC
+
 * terminal-mode
 ** setting default shell bash
 #+BEGIN_SRC emacs-lisp
@@ -18,8 +46,8 @@
 ** basic config
 #+BEGIN_SRC emacs-lisp
   (setq org-src-window-setup 'current-window)
-  (add-to-list 'org-structure-template-alist
-	       '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
+  ;;(add-to-list 'org-structure-template-alist
+  ;;       '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
   ;;(add-hook 'org-mode-hook 'org-indent-mode)
 #+END_SRC
 ** org bullets
@@ -31,14 +59,6 @@
 #+END_SRC
 
 * minor settings
-** utf-8 encoding
-#+BEGIN_SRC emacs-lisp
-  (setq locale-coding-system 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  (set-selection-coding-system 'utf-8)
-  (prefer-coding-system 'utf-8)
-#+END_SRC
 ** subword
 #+BEGIN_SRC emacs-lisp
   (global-subword-mode 1) ;; camel case notation
@@ -89,7 +109,7 @@
   (when window-system (global-hl-line-mode t))
   ;(when window-system (add-hook 'prog-mode-hook 'hl-line-mode))
   ;(when window-system (add-hook 'org-mode-hook 'hl-line-mode))
-  ;;(when window-system (global-prettify-symbols-mode)) ;; trasfor a word in a symbol
+  (when window-system (global-prettify-symbols-mode)) ;; trasfor a word in a symbol
 #+END_SRC
 ** y or no questions
 #+BEGIN_SRC emacs-lisp
@@ -99,11 +119,11 @@
 * convenient functions
 ** kill whole word
 #+BEGIN_SRC emacs-lisp
-  (defun kill-whole-word ()
-    (interactive)
-    (backward-word)
-    (kill-word 1))
-  (global-set-key (kbd "C-c w") 'kill-whole-word)
+  ;; (defun kill-whole-word ()
+  ;;   (interactive)
+  ;;   (backward-word)
+  ;;   (kill-word 1))
+  ;; (global-set-key (kbd "C-c w") 'kill-whole-word)
 #+END_SRC
 
 * use-package
@@ -116,13 +136,13 @@
 #+END_SRC
 ** popup-kill-ring
 #+BEGIN_SRC emacs-lisp
-  (use-package popup-kill-ring
-    :ensure t
-    :bind ("M-y" . popup-kill-ring))
+  ;; (use-package popup-kill-ring
+  ;;   :ensure t
+  ;;   :bind ("M-y" . popup-kill-ring))
 #+END_SRC
 
 * buffer
-** alway kill current buffer
+** always kill current buffer
 #+BEGIN_SRC emacs-lisp
   (defun kill-current-buffer ()
     (interactive)
@@ -135,7 +155,7 @@
 #+END_SRC
 ** switch buffer ;;work with ido
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
+  ;; (global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
 #+END_SRC
 ** expert mode
 #+BEGIN_SRC emacs-lisp
@@ -148,41 +168,42 @@
   (use-package avy
     :ensure t
     :bind ("C-r" . avy-goto-char))
+  (setq avy-keys '(?a ?s ?d ?f ?w ?e ?r ?j ?k ?l ?u ?i ?o))
 #+END_SRC
 ** swiper
 #+BEGIN_SRC emacs-lisp
-  (use-package swiper
-    :ensure t
-    :bind ("C-s" . swiper))
+  ;;(use-package swiper
+  ;;  :ensure t
+  ;;  :bind ("C-s" . swiper))
     ;;:bind ("C-i" . ivy-previous-line)
     ;;:bind ("C-k" . ivy-next-line))
 #+END_SRC
 ** rainbow
 *** rainbow-mode
 #+BEGIN_SRC emacs-lisp
-  (use-package rainbow-mode
-    :ensure t
-    :init (rainbow-mode 1)
-    :init (add-hook 'prog-mode-hook 'rainbow-mode))
+  ;; (use-package rainbow-mode
+  ;;   :ensure t
+  ;;   :init (rainbow-mode 1)
+  ;;   :init (add-hook 'prog-mode-hook 'rainbow-mode))
 #+END_SRC
 *** rainbow-brackets
 #+BEGIN_SRC emacs-lisp
-  (use-package rainbow-delimiters
-    :ensure t
-    ;:init (rainbow-delimiters-mode 1)
-    :init (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  ;; (use-package rainbow-delimiters
+  ;;   :ensure t
+  ;;   ;:init (rainbow-delimiters-mode 1)
+  ;;   :init (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 #+END_SRC
 ** mark-multiple and region
 #+BEGIN_SRC emacs-lisp
-  (use-package mark-multiple
-    :ensure t
-    :bind ("C-c m" . 'mark-next-like-this))
+  ;; (use-package mark-multiple
+  ;;   :ensure t
+  ;;   :bind ("C-c m" . 'mark-next-like-this))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (use-package expand-region
-    :ensure t
-    :bind ("C-q" . er/expand-region))
+  ;; (use-package expand-region
+  ;;   :ensure t
+  ;;   :bind ("C-q" . er/expand-region))
 #+END_SRC
 
 * config edit/reload
@@ -204,33 +225,33 @@
 * window
 ** switch window
 #+BEGIN_SRC emacs-lisp
-  (use-package switch-window
-    :ensure
-    :config
-    (setq switch-window-input-style 'minibuffer)
-    (setq switch-window-increase 4)
-    (setq switch-window-treshold 2)
-    (setq switch-window-shortcut-style 'qwerty)
-    (setq switch-window-qwerty-shortcuts
-	  '("s" "d" "f" "j" "k" "l"))
-    :bind
-    ([remap other-window] . switch-window))
+  ;; (use-package switch-window
+  ;;   :ensure
+  ;;   :config
+  ;;   (setq switch-window-input-style 'minibuffer)
+  ;;   (setq switch-window-increase 4)
+  ;;   (setq switch-window-treshold 2)
+  ;;   (setq switch-window-shortcut-style 'qwerty)
+  ;;   (setq switch-window-qwerty-shortcuts
+  ;; 	'("s" "d" "f" "j" "k" "l"))
+  ;;   :bind
+  ;;   ([remap other-window] . switch-window))
 #+END_SRC
 ** window splitting function
 #+BEGIN_SRC emacs-lisp
-  (defun split-and-follow-horizontally ()
-    (interactive)
-    (split-window-below)
-    (balance-windows)
-    (other-window 1))
-  (global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
+  ;; (defun split-and-follow-horizontally ()
+  ;;   (interactive)
+  ;;   (split-window-below)
+  ;;   (balance-windows)
+  ;;   (other-window 1))
+  ;; (global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
 
-  (defun split-and-follow-vertically ()
-    (interactive)
-    (split-window-right)
-    (balance-windows)
-    (other-window 1))
-  (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
+  ;; (defun split-and-follow-vertically ()
+  ;;   (interactive)
+  ;;   (split-window-right)
+  ;;   (balance-windows)
+  ;;   (other-window 1))
+  ;; (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 #+END_SRC
 
 ** ido
@@ -265,19 +286,19 @@
   (setq line-number-mode t)
   (setq column-number-mode t)
   ;;(use-package linum-relative
-  :ensure t
-  :config
+  ;;:ensure t
+  ;;:config
     ;;(setq linum-relative-current-symbol "")
     ;;(add-hook 'prog-mode-hook 'linum-relative-mode))
 #+END_SRC
 ** diminish
 #+BEGIN_SRC emacs-lisp
-  (use-package diminish
-    :ensure t
-    :init
-    (diminish 'beacon-mode)
-    (diminish 'which-key-mode)
-    (diminish 'subword-mode))
+  ;; (use-package diminish
+  ;;   :ensure t
+  ;;   :init
+  ;;   (diminish 'beacon-mode)
+  ;;   (diminish 'which-key-mode)
+  ;;   (diminish 'subword-mode))
 #+END_SRC
 
 * fill-column indicator
@@ -319,56 +340,16 @@
         (define-key icomplete-minibuffer-map (kbd "<left>") 'icomplete-backward-completions)))
   (fido-vertical-mode 1))
 #+END_SRC
-* keybindings
-#+BEGIN_SRC emacs-lisp
-  ;; right hand
-  ;;(global-set-key (kbd "M-i") 'previous-line)
-  ;;(global-set-key (kbd "M-k") 'next-line)
-  ;;(global-set-key (kbd "M-l") 'forward-char)
-  ;;(global-set-key (kbd "M-j") 'backward-char)
 
-  ;;(global-set-key (kbd "M-L") 'forward-word)
-  ;;(global-set-key (kbd "M-J") 'backward-word)
-  ;;(global-set-key (kbd "M-I") 'scroll-down-command)
-  ;;(global-set-key (kbd "M-K") 'scroll-up-command)
-
-  ;;(global-set-key (kbd "M-u") 'previous-buffer)
-  ;;(global-set-key (kbd "M-o") 'next-buffer)
-  ;;(global-set-key (kbd "M-U") 'backward-paragraph)
-  ;;(global-set-key (kbd "M-O") 'forward-paragraph)
-
-  ;;(global-set-key (kbd "M-;") 'recenter-top-bottom)
-  ;;(global-set-key (kbd "M-p") 'other-window)
-
-  ;;(global-set-key (kbd "M-m") 'beginning-of-line)
-  ;;(global-set-key (kbd "M-,") 'end-of-line)
-
-  ;; left hand
-  ;;(global-set-key (kbd "M-f") 'swiper)
-  ;;(global-set-key (kbd "M-d") 'avy-goto-char)
-  ;;(global-set-key (kbd "M-s") 'smex)
-  ;;(define-key org-mode-map (kbd "M-a") nil)
-  ;;(global-set-key (kbd "M-a") 'keyboard-quit)
-
-  ;;(global-set-key (kbd "M-q") 'fill-region-as-paragraph)
-  
-  ;;(define-key org-mode-map (kbd "M-e") nil)
-  ;;(global-set-key (kbd "M-e") 'kill-word)
-  ;;(global-set-key (kbd "M-r") 'delete-char)
-
-  ;;(global-set-key (kbd "M-R") 'kill-word)
-
-  ;;(global-set-key (kbd "M-z") 'undo)
-  ;;(global-set-key (kbd "M-x") 'kill-region)
-  ;;(global-set-key (kbd "M-c") 'kill-ring-save)
-  ;;(global-set-key (kbd "M-v") 'yank)
-#+END_SRC
 * xah fly keys
+** install xah-flykeys (non-gnu archive)
+  run in emacs
+  M-x package-install RET xah-fly-keys RET
 ** initialize
 #+BEGIN_SRC emacs-lisp
-;;(setq xah-fly-use-meta-key nil)
-(setq xah-fly-use-control-key nil)  ; disable C M shortcut keys
-(require 'xah-fly-keys)
+  (setq xah-fly-use-meta-key nil)
+  (setq xah-fly-use-control-key nil)  ; disable C M shortcut keys
+  (require 'xah-fly-keys)
   (xah-fly-keys-set-layout "qwerty") ; required
   (xah-fly-keys 1)  
 #+END_SRC
@@ -380,13 +361,13 @@
 ;;(define-key my-keymap (kbd "3") 'cmd2)
 ;;(define-key my-keymap (kbd "a") 'cmd3)
 
-;; make xah-fly-keys 【leader 8】 as prefix for my-keymap
+;; make xah-fly-keys [leader 8] as prefix for my-keymap
 (define-key xah-fly-leader-key-map (kbd "8") my-keymap)
 
 ;; so now,
-;; 【leader 8 space】 is cmd1
-;; 【leader 8 3】 is cmd2
-;; 【leader 8 a】 is cmd3
+;; [leader 8 space] is cmd1
+;; [leader 8 3] is cmd2
+;; [leader 8 a] is cmd3
 ;; etc
 
 ;;(xah-fly--define-keys
@@ -399,7 +380,7 @@
    ;;
    ;;))
 
-;; make xah-fly-keys 【leader 8】 as prefix for my-keymap
+;; make xah-fly-keys [leader 8] as prefix for my-keymap
 ;;(xah-fly--define-keys
 ;; (define-prefix-command 'xah-fly-leader-key-map)
 ;; '(
@@ -412,119 +393,121 @@
 ** right hand
 #+BEGIN_SRC emacs-lisp
   (define-key xah-fly-command-map (kbd "6") 'comment-line)
-  ;;(define-key xah-fly-command-map (kbd "^") ')
   (define-key xah-fly-command-map (kbd "7") 'previous-buffer)
-  ;;(define-key xah-fly-command-map (kbd "&") ')
+  ;;(define-key xah-fly-command-map (kbd "7") 'comment-dwim)
   (define-key xah-fly-command-map (kbd "8") (lambda () (interactive) (recenter) (scroll-down-command) (recenter)))
-  ;;(define-key xah-fly-command-map (kbd "*") ')
   (define-key xah-fly-command-map (kbd "9") 'next-buffer)
-  ;;(define-key xah-fly-command-map (kbd "(") ')
   (define-key xah-fly-command-map (kbd "0") 'comment-dwim)
-  ;;(define-key xah-fly-command-map (kbd ")") ')
-  ;;(define-key xah-fly-command-map (kbd "-") 'kill-current-buffer)
-  ;;(define-key xah-fly-command-map (kbd "_") ')
+  ;;(define-key xah-fly-command-map (kbd "-") ')
 
   (define-key xah-fly-command-map (kbd "y") 'set-mark-command)
-  ;;(define-key xah-fly-command-map (kbd "Y") ')
-  ;;(define-key xah-fly-command-map (kbd "y") (lambda () (interactive) (scroll-down-command) (recenter)))
   (define-key xah-fly-command-map (kbd "u") 'backward-word)
-  ;;(define-key xah-fly-command-map (kbd "U") 'previous-buffer)
   (define-key xah-fly-command-map (kbd "i") 'previous-line)
-  ;;(define-key xah-fly-command-map (kbd "i") (lambda () (interactive) (previous-line) (recenter)))
-  ;;(define-key xah-fly-command-map (kbd "I") (lambda () (interactive) (scroll-down-command) (recenter)))
   (define-key xah-fly-command-map (kbd "o") 'forward-word)
-  ;;(define-key xah-fly-command-map (kbd "O") 'next-buffer)
-  ;;(define-key xah-fly-command-map (kbd "p") 'previous-buffer)
-  ;;(define-key xah-fly-command-map (kbd "P") ')
-  ;;(define-key xah-fly-command-map (kbd "\\") 'next-buffer)
-  ;;(define-key xah-fly-command-map (kbd "|") ')
+  ;;(define-key xah-fly-command-map (kbd "p") 'other-window)
+  ;;(define-key xah-fly-command-map (kbd "\\") 'other-window)
 
   (define-key xah-fly-command-map (kbd "h") 'beginning-of-line)
-  ;;(define-key xah-fly-command-map (kbd "H") 'beginning-of-buffer)
-  ;;(define-key xah-fly-command-map (kbd "h") (lambda () (interactive) (scroll-up-command) (recenter)))
   (define-key xah-fly-command-map (kbd "j") 'backward-char)
-  ;;(define-key xah-fly-command-map (kbd "J") 'backward-sentence)
   (define-key xah-fly-command-map (kbd "k") 'next-line)
-  ;;(define-key xah-fly-command-map (kbd "K") (lambda () (interactive) (scroll-up-command) (recenter)))
   (define-key xah-fly-command-map (kbd "l") 'forward-char)
-  ;;(define-key xah-fly-command-map (kbd "k") (lambda () (interactive) (next-line) (recenter)))
-  ;;(define-key xah-fly-command-map (kbd "L") 'forward-sentence)
   (define-key xah-fly-command-map (kbd ";") 'recenter)
-  ;;(define-key xah-fly-command-map (kbd ":") ')
   (define-key xah-fly-command-map (kbd "'") 'end-of-line)
-  ;;(define-key xah-fly-command-map (kbd "\"") 'end-of-buffer)
 
   (define-key xah-fly-command-map (kbd "n") 'isearch-forward)
-  ;;(define-key xah-fly-command-map (kbd "N") ')
   ;;(define-key xah-fly-command-map (kbd "m") 'set-mark-command)
-  ;;(define-key xah-fly-command-map (kbd "M") 'kill-rectangle)
   (define-key xah-fly-command-map (kbd ",") (lambda () (interactive) (recenter) (scroll-up-command) (recenter)))
-  ;;(define-key xah-fly-command-map (kbd "<") ')
   ;;(define-key xah-fly-command-map (kbd ".") ')
-  ;;(define-key xah-fly-command-map (kbd ">") ')
   (define-key xah-fly-command-map (kbd "/") 'dired)
-  ;;(define-key xah-fly-command-map (kbd "?") ')
-  ;;(define-key xah-fly-command-map (kbd "") ')
-  ;;(define-key xah-fly-command-map (kbd "") ')
 
   ;;(define-key xah-fly-command-map (kbd "[") ')
-  ;;(define-key xah-fly-command-map (kbd "{") ')
   ;;(define-key xah-fly-command-map (kbd "]") ')
-  ;;(define-key xah-fly-command-map (kbd "}") ')
 #+END_SRC
+
 ** left hand
 #+BEGIN_SRC emacs-lisp
-;;(define-key xah-fly-command-map (kbd "=") ')
-;;(define-key xah-fly-command-map (kbd "+") ')
-;;(define-key xah-fly-command-map (kbd "1") ')
-;;(define-key xah-fly-command-map (kbd "!") ')
-(define-key xah-fly-command-map (kbd "2") 'split-window-vertically)
-;;(define-key xah-fly-command-map (kbd "@") ')
-(define-key xah-fly-command-map (kbd "3") 'delete-other-windows)
-;;(define-key xah-fly-command-map (kbd "#") ')
-(define-key xah-fly-command-map (kbd "4") 'split-window-horizontally)
-;;(define-key xah-fly-command-map (kbd "$") ')
-(define-key xah-fly-command-map (kbd "5") 'other-window)
-;;(define-key xah-fly-command-map (kbd "%") ')
+  ;;(define-key xah-fly-command-map (kbd "=") ')
+  ;;(define-key xah-fly-command-map (kbd "1") ')
+  (define-key xah-fly-command-map (kbd "2") 'split-window-vertically)
+  (define-key xah-fly-command-map (kbd "3") 'delete-other-windows)
+  (define-key xah-fly-command-map (kbd "4") 'split-window-horizontally)
+  (define-key xah-fly-command-map (kbd "5") 'other-window)
 
-;;(define key xah fly command map (kbd "") ')
-;;(define-key xah-fly-command-map (kbd "") ')
-(define-key xah-fly-command-map (kbd "q") 'kill-current-buffer)
-;;(define-key xah-fly-command-map (kbd "Q") ')
-(define-key xah-fly-command-map (kbd "w") (lambda () (interactive) (insert (char-from-name "SPACE"))))
-;;(define-key xah-fly-command-map (kbd "W") ')
-(define-key xah-fly-command-map (kbd "e") 'delete-backward-char)
-;;(define-key xah-fly-command-map (kbd "E") ')
-(define-key xah-fly-command-map (kbd "r") 'delete-char)
-;;(define-key xah-fly-command-map (kbd "R") ')
-(define-key xah-fly-command-map (kbd "t") 'kill-whole-line)
-;;(define-key xah-fly-command-map (kbd "T") ')
+  (define-key xah-fly-command-map (kbd "q") 'kill-current-buffer)
+  (define-key xah-fly-command-map (kbd "w") (lambda () (interactive) (insert (char-from-name "SPACE"))))
+  ;(define-key xah-fly-command-map (kbd "q") 'newline)
+  (define-key xah-fly-command-map (kbd "e") 'delete-backward-char)
+  (define-key xah-fly-command-map (kbd "r") 'delete-char)
+  (define-key xah-fly-command-map (kbd "t") 'kill-line)
 
-;;(define-key xah-fly-command-map (kbd "") ')
-;;(define-key xah-fly-command-map (kbd "") ')
-(define-key xah-fly-command-map (kbd "a") 'ibuffer)
-;;(define-key xah-fly-command-map (kbd "A") (kbd "C-g"))
-(define-key xah-fly-command-map (kbd "s") 'save-buffer)
-;;(define-key xah-fly-command-map (kbd "S") ')
-(define-key xah-fly-command-map (kbd "d") 'avy-goto-char)
-;;(define-key xah-fly-command-map (kbd "D") ')
-;;(define-key xah-fly-command-map (kbd "f") ')
-;;(define-key xah-fly-command-map (kbd "F") ')
-(define-key xah-fly-command-map (kbd "g") 'execute-extended-command)
-;;(define-key xah-fly-command-map (kbd "G") ')
+  (define-key xah-fly-command-map (kbd "a") 'ibuffer)
+  (define-key xah-fly-command-map (kbd "s") 'save-buffer)
+  (define-key xah-fly-command-map (kbd "d") 'avy-goto-char)
+  ;;(define-key xah-fly-command-map (kbd "f") ') ; insert-mode
+  (define-key xah-fly-command-map (kbd "g") 'execute-extended-command)
 
-;;(define-key xah-fly-command-map (kbd "") ')
-;;(define-key xah-fly-command-map (kbd "") ')
-(define-key xah-fly-command-map (kbd "z") 'undo)
-;;(define-key xah-fly-command-map (kbd "Z") ')
-(define-key xah-fly-command-map (kbd "x") 'delete-region)
-;;(define-key xah-fly-command-map (kbd "X") ')
-(define-key xah-fly-command-map (kbd "c") 'kill-ring-save)
-;;(define-key xah-fly-command-map (kbd "C") ')
-(define-key xah-fly-command-map (kbd "v") 'yank)
-;;(define-key xah-fly-command-map (kbd "V") ')
-(define-key xah-fly-command-map (kbd "b") 'undo-redo)
-;;(define-key xah-fly-command-map (kbd "B") ')
-;;(define-key xah-fly-command-map (kbd "") ')
-;;(define-key xah-fly-command-map (kbd "") ')
+  (define-key xah-fly-command-map (kbd "z") 'undo)
+  (define-key xah-fly-command-map (kbd "x") 'delete-region)
+  (define-key xah-fly-command-map (kbd "c") 'kill-ring-save)
+  (define-key xah-fly-command-map (kbd "v") 'yank)
+  (define-key xah-fly-command-map (kbd "b") 'undo-redo)
+#+END_SRC
+** right hand shift
+#+BEGIN_SRC emacs-lisp
+  ;;(define-key xah-fly-command-map (kbd "^") ')
+  ;;(define-key xah-fly-command-map (kbd "&") ')
+  ;;(define-key xah-fly-command-map (kbd "*") ')
+  ;;(define-key xah-fly-command-map (kbd "(") ')
+  ;;(define-key xah-fly-command-map (kbd ")") ')
+  ;;(define-key xah-fly-command-map (kbd "_") ')
+
+  ;;(define-key xah-fly-command-map (kbd "Y") ')
+  ;;(define-key xah-fly-command-map (kbd "U") 'previous-buffer)
+  ;;(define-key xah-fly-command-map (kbd "I") (lambda () (interactive) (scroll-down-command) (recenter)))
+  ;;(define-key xah-fly-command-map (kbd "O") 'next-buffer)
+  ;;(define-key xah-fly-command-map (kbd "P") ')
+  ;;(define-key xah-fly-command-map (kbd "|") ')
+
+  ;;(define-key xah-fly-command-map (kbd "H") 'beginning-of-buffer)
+  ;;(define-key xah-fly-command-map (kbd "J") 'backward-sentence)
+  ;;(define-key xah-fly-command-map (kbd "K") (lambda () (interactive) (scroll-up-command) (recenter)))
+  ;;(define-key xah-fly-command-map (kbd "L") 'forward-sentence)
+  ;;(define-key xah-fly-command-map (kbd ":") 'end-of-buffer)
+  ;;(define-key xah-fly-command-map (kbd "\"") 'end-of-buffer)
+
+  ;;(define-key xah-fly-command-map (kbd "N") ')
+  ;;(define-key xah-fly-command-map (kbd "M") 'kill-rectangle)
+  ;;(define-key xah-fly-command-map (kbd "<") ')
+  ;;(define-key xah-fly-command-map (kbd ">") ')
+  ;;(define-key xah-fly-command-map (kbd "?") ')
+
+  ;;(define-key xah-fly-command-map (kbd "{") ')
+  ;;(define-key xah-fly-command-map (kbd "}") ')
+#+END_SRC
+** left hand shift
+#+BEGIN_SRC emacs-lisp
+  ;;(define-key xah-fly-command-map (kbd "+") ')
+  ;;(define-key xah-fly-command-map (kbd "!") ')
+  ;;(define-key xah-fly-command-map (kbd "@") ')
+  ;;(define-key xah-fly-command-map (kbd "#") ')
+  ;;(define-key xah-fly-command-map (kbd "$") ')
+  ;;(define-key xah-fly-command-map (kbd "%") ')
+
+  ;;(define-key xah-fly-command-map (kbd "Q") ')
+  ;;(define-key xah-fly-command-map (kbd "W") 'kill-word)
+  ;;(define-key xah-fly-command-map (kbd "E") 'delete-char)
+  ;;(define-key xah-fly-command-map (kbd "R") ')
+  ;;(define-key xah-fly-command-map (kbd "T") ')
+
+  ;;(define-key xah-fly-command-map (kbd "A") (kbd "C-g"))
+  ;;(define-key xah-fly-command-map (kbd "S") ')
+  ;;(define-key xah-fly-command-map (kbd "D") 'avy-goto-char)
+  ;;(define-key xah-fly-command-map (kbd "F") ')
+  ;;(define-key xah-fly-command-map (kbd "G") ')
+
+  ;;(define-key xah-fly-command-map (kbd "Z") ')
+  ;;(define-key xah-fly-command-map (kbd "X") ')
+  ;;(define-key xah-fly-command-map (kbd "C") ')
+  ;;(define-key xah-fly-command-map (kbd "V") ')
+  ;;(define-key xah-fly-command-map (kbd "B") ')
 #+END_SRC

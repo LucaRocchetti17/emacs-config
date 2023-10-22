@@ -75,7 +75,7 @@
 ** menu-bar, tool-bar, scroll-bar
 #+BEGIN_SRC emacs-lisp
   (tool-bar-mode -1)
-  ;(menu-bar-mode -1)
+  (menu-bar-mode 1)
   (scroll-bar-mode 1)
   (blink-cursor-mode 0)
 #+END_SRC
