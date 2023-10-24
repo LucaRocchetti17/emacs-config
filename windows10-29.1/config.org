@@ -115,10 +115,10 @@
 * use-package
 ** which-key
 #+BEGIN_SRC emacs-lisp
-  ;; (use-package which-key
-  ;;   :ensure t
-  ;;   :init
-  ;;   (which-key-mode))
+   (use-package which-key
+     :ensure t
+     :init
+     (which-key-mode))
 #+END_SRC
 ** popup-kill-ring
 #+BEGIN_SRC emacs-lisp
