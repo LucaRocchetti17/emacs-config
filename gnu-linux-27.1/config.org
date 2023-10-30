@@ -126,6 +126,60 @@
   ;; (global-set-key (kbd "C-c w") 'kill-whole-word)
 #+END_SRC
 
+** previous line x20
+#+BEGIN_SRC emacs-lisp
+  (defun previous-line-x20 ()
+    (interactive)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (previous-line)
+    (recenter))
+#+END_SRC
+
+** next line x20
+#+BEGIN_SRC emacs-lisp
+  (defun next-line-x20 ()
+    (interactive)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (next-line)
+    (recenter))
+#+END_SRC
+
 * use-package
 ** which-key
 #+BEGIN_SRC emacs-lisp
@@ -395,7 +449,8 @@
   (define-key xah-fly-command-map (kbd "6") 'comment-line)
   (define-key xah-fly-command-map (kbd "7") 'previous-buffer)
   ;;(define-key xah-fly-command-map (kbd "7") 'comment-dwim)
-  (define-key xah-fly-command-map (kbd "8") (lambda () (interactive) (recenter) (scroll-down-command) (recenter)))
+  ;;(define-key xah-fly-command-map (kbd "8") (lambda () (interactive) (recenter) (scroll-down-command) (recenter)))
+  (define-key xah-fly-command-map (kbd "8") 'previous-line-x20)
   (define-key xah-fly-command-map (kbd "9") 'next-buffer)
   (define-key xah-fly-command-map (kbd "0") 'comment-dwim)
   ;;(define-key xah-fly-command-map (kbd "-") ')
@@ -416,7 +471,8 @@
 
   (define-key xah-fly-command-map (kbd "n") 'isearch-forward)
   ;;(define-key xah-fly-command-map (kbd "m") 'set-mark-command)
-  (define-key xah-fly-command-map (kbd ",") (lambda () (interactive) (recenter) (scroll-up-command) (recenter)))
+  ;;(define-key xah-fly-command-map (kbd ",") (lambda () (interactive) (recenter) (scroll-up-command) (recenter)))
+  (define-key xah-fly-command-map (kbd ",") 'next-line-x20)
   ;;(define-key xah-fly-command-map (kbd ".") ')
   (define-key xah-fly-command-map (kbd "/") 'dired)
 
