@@ -591,6 +591,13 @@
   ;;(define-key xah-fly-command-map (kbd "B") ')
 #+END_SRC
 
+* yaml-mode
+#+begin_src emacs-lisp
+  (use-package yaml-mode
+    :ensure t)
+  (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+#+end_src
+
 * dired
 #+BEGIN_SRC-emacs-lisp
   ;;(add-hook 'dired-mode-hook 'dired-hide-details-mode)
