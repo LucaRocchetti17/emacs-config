@@ -573,3 +573,9 @@
     :ensure t)
   (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
 #+end_src
+* vue-mode
+#+begin_src emacs-lisp
+  (use-package vue-mode
+    :ensure t)
+  (add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
+#+end_src
