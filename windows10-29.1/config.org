@@ -422,6 +422,10 @@
 ** install xah-flykeys (non-gnu archive)
   run in emacs
   M-x package-install RET xah-fly-keys RET
+  (use-package xah-fly-keys
+    :ensure t)
+  (global-set-key "<Caps_Lock>" xah-fly-insert-mode-activate)
+  
 ** initialize
 #+BEGIN_SRC emacs-lisp
   (setq xah-fly-use-meta-key nil)
@@ -602,6 +606,10 @@
 #+BEGIN_SRC-emacs-lisp
   ;;(add-hook 'dired-mode-hook 'dired-hide-details-mode)
   ;;(add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
-  (global-set-key "<Caps_Lock>" xah-fly-insert-mode-activate)
+  
+  ;; Make dired open in the same window when using RET or ^
+  ;;(put 'dired-find-alternate-file 'disabled nil) ; disables warning
+  ;;(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file) ; was dired-advertised-find-file
+  ;;(define-key dired-mode-map (kbd "^") (lambda () (interactive) (find-alternate-file "..")))  ; was dired-up-directory
 #+END_SRC
 
