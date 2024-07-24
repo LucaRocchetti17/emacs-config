@@ -7,6 +7,8 @@
 
 (setq package-enable-at-startup nil)
 
+;;(setq package-check-signature nil) ;;for xah
+
 (setq package-archives '(
   ("ELPA"   . "http://tromey.com/elpa/")
   ("gnu"    . "http://elpa.gnu.org/packages/")
