@@ -497,7 +497,7 @@
   (define-key xah-fly-command-map (kbd "g") 'execute-extended-command)
 
   (define-key xah-fly-command-map (kbd "z") 'undo)
-  (define-key xah-fly-command-map (kbd "x") 'delete-region)
+  (define-key xah-fly-command-map (kbd "x") 'kill-region)
   (define-key xah-fly-command-map (kbd "c") 'kill-ring-save)
   (define-key xah-fly-command-map (kbd "v") 'yank)
   (define-key xah-fly-command-map (kbd "b") 'undo-redo)
